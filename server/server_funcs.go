@@ -21,5 +21,9 @@ func (s *Server) PersistValues(ctx context.Context, in *pbout.XlsxValues) (*pbou
 func (s *Server) GetXlsxValues(ctx context.Context, in *pbout.GetValRequest) (*pbout.XlsxValues, error) {
 	log.Printf("GetXlsxValues function invoked with request %v\n", in)
 	log.Printf("Function not implemented yet\n")
-	return &pbout.XlsxValues{}, nil
+	return &pbout.XlsxValues{
+		FileName:  "Not",
+		SheetName: "Implemented yet",
+		Cols:      nil,
+	}, nil
 }
