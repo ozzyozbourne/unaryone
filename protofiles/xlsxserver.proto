@@ -8,17 +8,21 @@ option go_package = "github.com/ozzyozbourne/unaryone/pbout";
 option java_package = "unaryone.pbout";
 option java_multiple_files = true;
 
-message CreateXlsxFileRequest {
+message XlsxValues {
 	string fileName = 1;
 	string sheetName = 2;
 	repeated sample.columns cols= 3;
 }
 
-message CreateXlsxFileResponse {
+message XlsxValuesResponse {
+	uint32 res = 1;
+}
+
+message GetValRequest {
 	string res = 1;
-	bool fileSaved = 2;
 }
 
 service SaveInGRPCServer {
-	rpc PersistValues (CreateXlsxFileRequest) returns (CreateXlsxFileResponse);
+	rpc PersistValues (XlsxValues) returns (XlsxValuesResponse);
+	rpc GetXlsxValues (GetValRequest) returns (XlsxValues);
 }
