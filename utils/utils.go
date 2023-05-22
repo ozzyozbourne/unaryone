@@ -44,7 +44,7 @@ func GetXlsxValue() *pbout.XlsxValues {
 }
 
 func MakeDir() {
-	dir := "../savedxlsxfiles"
+	dir := "savedxlsxfiles"
 	if err := os.Mkdir(dir, os.ModePerm); os.IsExist(err) {
 		log.Printf("The directory named %s exists\n", dir)
 	} else {

@@ -74,7 +74,7 @@ func WriteToFile(xlsxVal *pbout.XlsxValues) error {
 		log.Printf("ROW Saved Successfully\n")
 	}
 
-	path := filepath.Join("../", "savedxlsxfiles", xlsxVal.FileName+".xlsx")
+	path := filepath.Join("savedxlsxfiles", xlsxVal.FileName+".xlsx")
 	log.Printf("Saving file to disk [LOC] -> %s\n", path)
 	if err := f.SaveAs(path); err != nil {
 		log.Printf("Error in saving to disk with file name %s\n", xlsxVal.FileName)
