@@ -22,7 +22,7 @@ message GetValRequest {
 	string res = 1;
 }
 
-service SaveInGRPCServer {
+service SaveInGRPC {
 	rpc PersistValues (XlsxValues) returns (XlsxValuesResponse);
 	rpc GetXlsxValues (GetValRequest) returns (XlsxValues);
 }

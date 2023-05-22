@@ -18,122 +18,122 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// SaveInGRPCServerClient is the client API for SaveInGRPCServer service.
+// SaveInGRPCClient is the client API for SaveInGRPC service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type SaveInGRPCServerClient interface {
+type SaveInGRPCClient interface {
 	PersistValues(ctx context.Context, in *XlsxValues, opts ...grpc.CallOption) (*XlsxValuesResponse, error)
 	GetXlsxValues(ctx context.Context, in *GetValRequest, opts ...grpc.CallOption) (*XlsxValues, error)
 }
 
-type saveInGRPCServerClient struct {
+type saveInGRPCClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewSaveInGRPCServerClient(cc grpc.ClientConnInterface) SaveInGRPCServerClient {
-	return &saveInGRPCServerClient{cc}
+func NewSaveInGRPCClient(cc grpc.ClientConnInterface) SaveInGRPCClient {
+	return &saveInGRPCClient{cc}
 }
 
-func (c *saveInGRPCServerClient) PersistValues(ctx context.Context, in *XlsxValues, opts ...grpc.CallOption) (*XlsxValuesResponse, error) {
+func (c *saveInGRPCClient) PersistValues(ctx context.Context, in *XlsxValues, opts ...grpc.CallOption) (*XlsxValuesResponse, error) {
 	out := new(XlsxValuesResponse)
-	err := c.cc.Invoke(ctx, "/pbout.SaveInGRPCServer/PersistValues", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/pbout.SaveInGRPC/PersistValues", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *saveInGRPCServerClient) GetXlsxValues(ctx context.Context, in *GetValRequest, opts ...grpc.CallOption) (*XlsxValues, error) {
+func (c *saveInGRPCClient) GetXlsxValues(ctx context.Context, in *GetValRequest, opts ...grpc.CallOption) (*XlsxValues, error) {
 	out := new(XlsxValues)
-	err := c.cc.Invoke(ctx, "/pbout.SaveInGRPCServer/GetXlsxValues", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/pbout.SaveInGRPC/GetXlsxValues", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// SaveInGRPCServerServer is the server API for SaveInGRPCServer service.
-// All implementations must embed UnimplementedSaveInGRPCServerServer
+// SaveInGRPCServer is the server API for SaveInGRPC service.
+// All implementations must embed UnimplementedSaveInGRPCServer
 // for forward compatibility
-type SaveInGRPCServerServer interface {
+type SaveInGRPCServer interface {
 	PersistValues(context.Context, *XlsxValues) (*XlsxValuesResponse, error)
 	GetXlsxValues(context.Context, *GetValRequest) (*XlsxValues, error)
-	mustEmbedUnimplementedSaveInGRPCServerServer()
+	mustEmbedUnimplementedSaveInGRPCServer()
 }
 
-// UnimplementedSaveInGRPCServerServer must be embedded to have forward compatible implementations.
-type UnimplementedSaveInGRPCServerServer struct {
+// UnimplementedSaveInGRPCServer must be embedded to have forward compatible implementations.
+type UnimplementedSaveInGRPCServer struct {
 }
 
-func (UnimplementedSaveInGRPCServerServer) PersistValues(context.Context, *XlsxValues) (*XlsxValuesResponse, error) {
+func (UnimplementedSaveInGRPCServer) PersistValues(context.Context, *XlsxValues) (*XlsxValuesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PersistValues not implemented")
 }
-func (UnimplementedSaveInGRPCServerServer) GetXlsxValues(context.Context, *GetValRequest) (*XlsxValues, error) {
+func (UnimplementedSaveInGRPCServer) GetXlsxValues(context.Context, *GetValRequest) (*XlsxValues, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetXlsxValues not implemented")
 }
-func (UnimplementedSaveInGRPCServerServer) mustEmbedUnimplementedSaveInGRPCServerServer() {}
+func (UnimplementedSaveInGRPCServer) mustEmbedUnimplementedSaveInGRPCServer() {}
 
-// UnsafeSaveInGRPCServerServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to SaveInGRPCServerServer will
+// UnsafeSaveInGRPCServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to SaveInGRPCServer will
 // result in compilation errors.
-type UnsafeSaveInGRPCServerServer interface {
-	mustEmbedUnimplementedSaveInGRPCServerServer()
+type UnsafeSaveInGRPCServer interface {
+	mustEmbedUnimplementedSaveInGRPCServer()
 }
 
-func RegisterSaveInGRPCServerServer(s grpc.ServiceRegistrar, srv SaveInGRPCServerServer) {
-	s.RegisterService(&SaveInGRPCServer_ServiceDesc, srv)
+func RegisterSaveInGRPCServer(s grpc.ServiceRegistrar, srv SaveInGRPCServer) {
+	s.RegisterService(&SaveInGRPC_ServiceDesc, srv)
 }
 
-func _SaveInGRPCServer_PersistValues_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _SaveInGRPC_PersistValues_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(XlsxValues)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SaveInGRPCServerServer).PersistValues(ctx, in)
+		return srv.(SaveInGRPCServer).PersistValues(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pbout.SaveInGRPCServer/PersistValues",
+		FullMethod: "/pbout.SaveInGRPC/PersistValues",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SaveInGRPCServerServer).PersistValues(ctx, req.(*XlsxValues))
+		return srv.(SaveInGRPCServer).PersistValues(ctx, req.(*XlsxValues))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SaveInGRPCServer_GetXlsxValues_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _SaveInGRPC_GetXlsxValues_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetValRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SaveInGRPCServerServer).GetXlsxValues(ctx, in)
+		return srv.(SaveInGRPCServer).GetXlsxValues(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pbout.SaveInGRPCServer/GetXlsxValues",
+		FullMethod: "/pbout.SaveInGRPC/GetXlsxValues",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SaveInGRPCServerServer).GetXlsxValues(ctx, req.(*GetValRequest))
+		return srv.(SaveInGRPCServer).GetXlsxValues(ctx, req.(*GetValRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// SaveInGRPCServer_ServiceDesc is the grpc.ServiceDesc for SaveInGRPCServer service.
+// SaveInGRPC_ServiceDesc is the grpc.ServiceDesc for SaveInGRPC service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var SaveInGRPCServer_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pbout.SaveInGRPCServer",
-	HandlerType: (*SaveInGRPCServerServer)(nil),
+var SaveInGRPC_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pbout.SaveInGRPC",
+	HandlerType: (*SaveInGRPCServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "PersistValues",
-			Handler:    _SaveInGRPCServer_PersistValues_Handler,
+			Handler:    _SaveInGRPC_PersistValues_Handler,
 		},
 		{
 			MethodName: "GetXlsxValues",
-			Handler:    _SaveInGRPCServer_GetXlsxValues_Handler,
+			Handler:    _SaveInGRPC_GetXlsxValues_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
