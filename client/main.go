@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/ozzyozbourne/unaryone/pbout"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
@@ -19,4 +20,8 @@ func main() {
 			log.Fatalf("Error on closing the connection %s\n", err)
 		}
 	}()
+
+	c := pbout.NewSaveInGRPCClient(conn)
+	saveInGrpc(c)
+	readFromGrpc(c)
 }
