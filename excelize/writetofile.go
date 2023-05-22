@@ -13,7 +13,7 @@ import (
 func WriteToFile(xlsxVal *pbout.XlsxValues) error {
 	log.Printf("checking to if savexlsxfiles dir is present or not\n")
 	utils.MakeDir()
-	log.Printf("File to be created	-> %s\nSheet to be created	-> %s\n", xlsxVal.FileName, xlsxVal.SheetName)
+	log.Printf("File to be created	-> %s Sheet to be created	-> %s\n", xlsxVal.FileName, xlsxVal.SheetName)
 	f := excelize.NewFile()
 
 	defer func() error {

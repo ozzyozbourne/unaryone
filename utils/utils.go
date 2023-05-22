@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"fmt"
 	"github.com/ozzyozbourne/unaryone/pbout"
 	"github.com/ozzyozbourne/unaryone/pbout/schemas"
 	"log"
@@ -45,10 +44,10 @@ func GetXlsxValue() *pbout.XlsxValues {
 }
 
 func MakeDir() {
-	dir := "savedxlsxfiles"
+	dir := "../savedxlsxfiles"
 	if err := os.Mkdir(dir, os.ModePerm); os.IsExist(err) {
 		log.Printf("The directory named %s exists\n", dir)
 	} else {
-		fmt.Printf("The directory named %s does not exist hence created\n")
+		log.Printf("The directory named %s does not exist hence created\n", dir)
 	}
 }
