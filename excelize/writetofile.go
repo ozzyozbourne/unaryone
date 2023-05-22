@@ -6,12 +6,12 @@ import (
 	"log"
 	"path/filepath"
 	"strconv"
+	"strings"
 )
 
 func WriteToFile(xlsxVal *pbout.XlsxValues) error {
 
-	log.Printf("File to be created	-> %s\n"+
-		"Sheet to be created	-> %s\n", xlsxVal.FileName, xlsxVal.SheetName)
+	log.Printf("File to be created	-> %s\nSheet to be created	-> %s\n", xlsxVal.FileName, xlsxVal.SheetName)
 	f := excelize.NewFile()
 
 	defer func() error {
@@ -33,12 +33,16 @@ func WriteToFile(xlsxVal *pbout.XlsxValues) error {
 
 	log.Printf("Created Successfully\n")
 
-	log.Printf("Deleting the default generated sheet\n")
-	if err := f.DeleteSheet("Sheet1"); err != nil {
-		log.Printf("Error occurred in delete default sheet names -> sheet1\n")
-		return err
+	if strings.Compare(xlsxVal.SheetName, "sheet1") != 0 {
+		log.Printf("Deleting the default generated sheet\n")
+		if err := f.DeleteSheet("Sheet1"); err != nil {
+			log.Printf("Error occurred in delete default sheet names -> sheet1\n")
+			return err
+		}
+		log.Printf("Deleted sucessfuly\n")
+	} else {
+		log.Printf("Sheet name is default sheet1 and skiping deletion")
 	}
-	log.Printf("Deleted sucessfuly\n")
 
 	log.Printf("Setting with index %d as active\n", index)
 	f.SetActiveSheet(index)
@@ -56,13 +60,11 @@ func WriteToFile(xlsxVal *pbout.XlsxValues) error {
 			return err
 		}
 
-		row++
 		if err := f.SetCellStr(xlsxVal.SheetName, "B"+strconv.Itoa(row), v.LastName); err != nil {
 			log.Printf("Error occurred in writing Last name -> %s\n", v)
 			return err
 		}
 
-		row++
 		if err := f.SetCellInt(xlsxVal.SheetName, "C"+strconv.Itoa(row), int(v.Age)); err != nil {
 			log.Printf("Error occurred in writing Age-> %s\n", v)
 			return err
@@ -70,7 +72,7 @@ func WriteToFile(xlsxVal *pbout.XlsxValues) error {
 		log.Printf("ROW Saved Successfully\n")
 	}
 
-	path := filepath.Join("savedxlsxfiles", xlsxVal.FileName+".xlsx")
+	path := filepath.Join("../", "savedxlsxfiles", xlsxVal.FileName+".xlsx")
 	log.Printf("Saving file to disk [LOC] -> %s\n", path)
 	if err := f.SaveAs(path); err != nil {
 		log.Printf("Error in saving to disk with file name %s\n", xlsxVal.FileName)

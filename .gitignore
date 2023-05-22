@@ -19,3 +19,4 @@ go.work
 #folders to ignore
 .idea
 build
+savedxlsxfiles
