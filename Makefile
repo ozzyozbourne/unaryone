@@ -5,12 +5,12 @@ PACKAGE = $(shell head -1 go.mod | awk '{print $$2}')
 
 #protoc code gen command
 generate:
-	protoc -I${PROTO_DIR} --go_opt=module=${PACKAGE} --go_out=. --go_grpc_opt=module=${PACKAGE} --go_grpc_out=. ${PROTO_DIR}/*.proto
+	find ${PROTO_DIR} -name "*.proto" -exec protoc -I${PROTO_DIR} --go_opt=module=${PACKAGE} --go_out=. --go-grpc_opt=module=${PACKAGE} --go-grpc_out=. {} \;
 
 
 #clean the output directories
 clean_proto:
-	rm -f ${PROTO_OUT}/*.pb.go
+	rm -rf pbout
 
 clean_server:
 	rm -f ${BUILD_DIR}/server_linux
