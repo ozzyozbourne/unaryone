@@ -2,6 +2,7 @@ package excelize
 
 import (
 	"github.com/ozzyozbourne/unaryone/pbout"
+	"github.com/ozzyozbourne/unaryone/utils"
 	"github.com/xuri/excelize/v2"
 	"log"
 	"path/filepath"
@@ -10,7 +11,8 @@ import (
 )
 
 func WriteToFile(xlsxVal *pbout.XlsxValues) error {
-
+	log.Printf("checking to if savexlsxfiles dir is present or not\n")
+	utils.MakeDir()
 	log.Printf("File to be created	-> %s\nSheet to be created	-> %s\n", xlsxVal.FileName, xlsxVal.SheetName)
 	f := excelize.NewFile()
 

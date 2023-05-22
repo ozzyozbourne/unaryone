@@ -9,7 +9,7 @@ generate:
 
 #clean and generated resource folder
 rs_create:
-	mdkir savedxlsxfiles
+	mkdir savedxlsxfiles
 
 rs_clean:
 	rm -rf savedxlsxfiles
