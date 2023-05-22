@@ -7,6 +7,15 @@ PACKAGE = $(shell head -1 go.mod | awk '{print $$2}')
 generate:
 	find ${PROTO_DIR} -name "*.proto" -exec protoc -I${PROTO_DIR} --go_opt=module=${PACKAGE} --go_out=. --go-grpc_opt=module=${PACKAGE} --go-grpc_out=. {} \;
 
+#clean and generated resource folder
+rs_create:
+	mdkir savedxlsxfiles
+
+rs_clean:
+	rm -rf savedxlsxfiles
+
+rs:	rs_clean rs_create
+
 
 #clean the output directories
 clean_proto:
@@ -39,4 +48,7 @@ build_client:
 build:	build_server build_client
 
 #build from scratch
-all:	clean generate build
+all:	rs clean generate build
+
+
+
