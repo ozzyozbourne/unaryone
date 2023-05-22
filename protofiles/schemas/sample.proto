@@ -7,7 +7,7 @@ option java_package = "unaryone.pbout.schemas";
 option java_multiple_files = true;
 
 message columns {
-    uint32 colno = 1;
+    uint32 rowNo = 1;
     string firstName = 2;
     string lastName = 3;
     uint32 age = 4;
